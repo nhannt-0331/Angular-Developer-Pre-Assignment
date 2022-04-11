@@ -1,0 +1,39 @@
+<div class="card" *ngIf="!showModal">
+    <div class="mb-5" *ngFor="let item of formQA.controls; index as i">
+        <div class="flex flex-column mb-5" *ngIf="item.value.type.value === 'text' && item">
+            <div class="question">
+                {{ item.value.question }}
+            </div>
+
+            <textarea class="answer mt-3" rows="10" pInputTextarea [formControl]="$any(item.get('answer'))"></textarea>
+            <button pButton pRipple type="button" (click)="removeForm(i)" label="Remove" class="p-button-danger"></button>
+        </div>
+    </div>
+    <div class="mb-5">
+        <p-button (click)="addFormQA()" label="Add New Question" styleClass="p-button-link"></p-button>
+        <p-button (click)="navigateToView()" label="Review my answers"></p-button>
+    </div>
+</div>
+
+<p-dialog header=" Add a New Questions" [(visible)]="showModal" [style]="{ width: '50vw', height: '80vh' }" *ngIf="currentFormQA" (onHide)="closeDialog()">
+    <p-dropdown [options]="types" [formControl]="$any(currentFormQA.get('type'))" optionLabel="name" placeholder="Select a type"></p-dropdown>
+    <div class="flex flex-column">
+        <div *ngIf="currentFormQA.value.type.value === 'text'" class="flex flex-column">
+            <textarea rows="5" placeholder="type question here" [formControl]="$any(currentFormQA.get('question'))" pInputTextarea></textarea>
+            <textarea rows="5" pInputTextarea placeholder="type question here" [formControl]="$any(currentFormQA.get('answer'))"></textarea>
+        </div>
+    </div>
+
+    <div class="flex flex-column">
+        <div *ngIf="currentFormQA.value.type.value === 'dropdown'" class="flex flex-column">
+            <textarea rows="5" placeholder="type question here" [formControl]="$any(currentFormQA.get('question'))" pInputTextarea></textarea>
+            <div class="field-checkbox">
+                <p-button (click)="addCheckList()" label="+ Add another answer" styleClass="p-button-link"></p-button>
+            </div>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button (click)="submitNewQA()" label="Submit" [ngClass]="{ disabled: formQA.valid === false }"></p-button>
+    </ng-template>
+</p-dialog>
