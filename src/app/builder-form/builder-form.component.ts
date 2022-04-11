@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormService } from '../form-service';
 
@@ -18,6 +18,8 @@ export class BuilderFormComponent implements OnInit {
         { name: 'Paragraph', value: 'text' },
         { name: 'Checkbox List', value: 'dropdown' },
     ];
+
+    list = new FormArray([]);
 
     constructor(private fb: FormBuilder, private formService: FormService, private router: Router) { }
 
@@ -48,7 +50,7 @@ export class BuilderFormComponent implements OnInit {
     createFormQA(): FormGroup {
         return this.fb.group({
             question: ['', Validators.required],
-            answer: '',
+            answer: [],
             type: '',
         });
     }
@@ -79,7 +81,6 @@ export class BuilderFormComponent implements OnInit {
     }
 
     addCheckList() {
-        console.log('sad');
-
+        this.list.push(new FormControl(''));
     }
 }

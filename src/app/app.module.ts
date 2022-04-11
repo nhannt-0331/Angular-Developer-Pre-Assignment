@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AnswerFormComponent } from './answer-form/answer-form.component';
@@ -27,7 +28,8 @@ import { BuilderFormComponent } from './builder-form/builder-form.component';
         DialogModule,
         BrowserAnimationsModule,
         InputTextareaModule,
-        CheckboxModule
+        CheckboxModule,
+        InputTextModule
     ],
     providers: [],
     bootstrap: [AppComponent],

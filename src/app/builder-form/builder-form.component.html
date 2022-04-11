@@ -8,6 +8,13 @@
             <textarea class="answer mt-3" rows="10" pInputTextarea [formControl]="$any(item.get('answer'))"></textarea>
             <button pButton pRipple type="button" (click)="removeForm(i)" label="Remove" class="p-button-danger"></button>
         </div>
+        <div class="flex flex-column mb-5" *ngIf="item.value.type.value === 'dropdown' && item">
+            <div class="question">
+                {{ item.value.question }}
+            </div>
+            <textarea class="answer mt-3" rows="10" pInputTextarea [formControl]="$any(item.get('answer'))"></textarea>
+            <button pButton pRipple type="button" (click)="removeForm(i)" label="Remove" class="p-button-danger"></button>
+        </div>
     </div>
     <div class="mb-5">
         <p-button (click)="addFormQA()" label="Add New Question" styleClass="p-button-link"></p-button>
@@ -27,7 +34,10 @@
     <div class="flex flex-column">
         <div *ngIf="currentFormQA.value.type.value === 'dropdown'" class="flex flex-column">
             <textarea rows="5" placeholder="type question here" [formControl]="$any(currentFormQA.get('question'))" pInputTextarea></textarea>
-            <div class="field-checkbox">
+            <div *ngFor="let control of list.controls; index as i">
+                <input pInputText [formControl]="$any(list.controls[i])" />
+            </div>
+            <div>
                 <p-button (click)="addCheckList()" label="+ Add another answer" styleClass="p-button-link"></p-button>
             </div>
         </div>
